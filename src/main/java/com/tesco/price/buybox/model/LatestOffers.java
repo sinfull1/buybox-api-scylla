@@ -11,8 +11,10 @@ public interface LatestOffers {
 
     @Value("#{target.seller_id}")
     public String getSellerId();
+
     @Value("#{target.effective_at}")
     public LocalDateTime getEffectiveAt();
+
     public BuyBoxOfferKey getBuyBoxOfferKey();
 
 }
