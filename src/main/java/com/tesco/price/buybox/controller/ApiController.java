@@ -89,7 +89,7 @@ public class ApiController {
         return new BuyBoxOffer(new BuyBoxOfferKey(productId, locationId, effectiveAt, sellerId), price, LocalDateTime.now(), tags);
     }
 
-    Comparator<BuyBoxOffer> comparator = Comparator.comparing(ele -> ele.getPrice());
+    Comparator<BuyBoxOffer> comparator = Comparator.comparing(BuyBoxOffer::getPrice);
 
     @Autowired
     private BuyBoxOfferRepository buyBoxOfferRepository;

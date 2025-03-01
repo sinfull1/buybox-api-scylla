@@ -27,7 +27,37 @@ public class BuyBoxOfferKey implements Serializable {
     @PrimaryKeyColumn(name = "effective_at", type = CLUSTERED, ordering = Ordering.DESCENDING)
     private LocalDateTime effectiveAt;
 
+    public String getProductId() {
+        return productId;
+    }
 
+    public void setProductId(String productId) {
+        this.productId = productId;
+    }
+
+    public String getLocationId() {
+        return locationId;
+    }
+
+    public void setLocationId(String locationId) {
+        this.locationId = locationId;
+    }
+
+    public String getSellerId() {
+        return sellerId;
+    }
+
+    public void setSellerId(String sellerId) {
+        this.sellerId = sellerId;
+    }
+
+    public LocalDateTime getEffectiveAt() {
+        return effectiveAt;
+    }
+
+    public void setEffectiveAt(LocalDateTime effectiveAt) {
+        this.effectiveAt = effectiveAt;
+    }
 
     // Constructors
     public BuyBoxOfferKey() {
