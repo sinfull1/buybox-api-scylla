@@ -18,6 +18,7 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.time.LocalDateTime;
 import java.util.*;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/buybox")
@@ -95,6 +96,7 @@ public class ApiController {
     private BuyBoxOfferRepository buyBoxOfferRepository;
 
     @PostMapping("/offer")
+    @CrossOrigin(origins = "*")
     public BuyBoxOffer getEvents() {
         return buyBoxOfferRepository.save(generateRandomOffer());
     }
@@ -131,10 +133,20 @@ public class ApiController {
         return offers;
     }
 
-    @GetMapping("/products/{productId}")
+    @GetMapping("/product/{productId}")
     @CrossOrigin(origins = "*")
-    public List<SearchProducts> searchProduct(@PathVariable String productId) throws JsonProcessingException {
-        return buyBoxOfferRepository.searchAllBy(productId);
+    public Set<String> searchProduct(@PathVariable String productId) {
+        HashSet<String> products = new HashSet<>();
+        buyBoxOfferRepository.searchAllByProduct("%"+productId.toUpperCase()+"%").forEach(x-> products.add(x.getBuyBoxOfferKey().getProductId()));
+        return products;
+    }
+
+    @GetMapping("/location/{locationId}")
+    @CrossOrigin(origins = "*")
+    public Set<String> searchLocation(@PathVariable String locationId) {
+        HashSet<String> location = new HashSet<>();
+        buyBoxOfferRepository.searchAllByLocation("%" + locationId.toUpperCase()+"%").forEach(x-> location.add(x.getBuyBoxOfferKey().getLocationId()));
+        return location;
     }
 
 

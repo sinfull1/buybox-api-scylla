@@ -9,5 +9,7 @@ public interface SearchProducts {
     public String getProductId();
 
     @Value("#{target.location_id}")
-    public LocalDateTime getLocationId();
+    public String getLocationId();
+
+
 }

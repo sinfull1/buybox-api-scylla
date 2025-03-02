@@ -27,8 +27,11 @@ public interface BuyBoxOfferRepository extends CassandraRepository<BuyBoxOffer, 
 
 
 
-    @Query("select distinct product_id,location_id from buybox.buybox_offers where product_id like '%:productIdKey%'  ALLOW FILTERING ")
-    List<SearchProducts> searchAllBy(String productIdKey);
+    @Query("select distinct product_id,location_id from buybox.buybox_offers where product_id like ?0  ALLOW FILTERING ")
+    List<BuyBoxOffer> searchAllByProduct(String productIdKey);
+
+    @Query("select distinct product_id,location_id from buybox.buybox_offers where location_id like ?0  ALLOW FILTERING ")
+    List<BuyBoxOffer> searchAllByLocation(String locationIdKey);
 
     @Query("SELECT * FROM buybox.buybox_offers " +
             "WHERE product_id = ?0 AND location_id = ?1  ")
@@ -38,5 +41,6 @@ public interface BuyBoxOfferRepository extends CassandraRepository<BuyBoxOffer, 
     @Query("SELECT * FROM buybox.buybox_offers " +
             "WHERE seller_id = ?0 AND location_id = ?1 AND effective_at <= ?2 ALLOW FILTERING")
     List<BuyBoxOffer> findOfferBySellerId(String sellerId, String locationId, LocalDateTime effectiveAt);
+
 
 }
